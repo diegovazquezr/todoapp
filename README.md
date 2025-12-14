@@ -1,7 +1,7 @@
 # TODOAPP
 
 
-![Vista de la aplicación](docs/screenshot.png)
+![Vista de la aplicación](docs/screenshot_edit.png)
 
 
 ## Dependencias
