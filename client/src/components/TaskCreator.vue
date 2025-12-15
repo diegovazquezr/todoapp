@@ -2,14 +2,33 @@
 export default {
     data() {
         return {
-            titulo: ""
+            titulo: "",
+            msg: ""
         }
     },
     emits: ['crear'],
     methods: {
         emitCrear() {
+            if (this.titulo === '') {
+                this.msg = "Debes ingresar un titulo"
+                return
+            }
+
+            if (this.titulo.length > 255) {
+                this.msg = "El titulo es demasiado grande"
+                return
+
+            }
+
             this.$emit('crear', this.titulo);
             this.titulo = "";
+            this.msg = ""
+        }
+    },
+    computed: {
+        limiteCaracteres() {
+            this.msg = ""
+            return `${this.titulo.length} / 255`
         }
     }
 }
@@ -37,6 +56,8 @@ export default {
                 </button>
             </div>
         </div>
+        <span>{{ limiteCaracteres }}</span>
+        <span v-if="msg !== ''" class='error'>&nbsp;{{ msg }}</span>
     </div>
 </template>
 
@@ -99,5 +120,9 @@ export default {
 
 .btn:hover {
   opacity: 0.85;
+}
+
+.error {
+    color: red;
 }
 </style>
