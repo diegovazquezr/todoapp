@@ -20,7 +20,7 @@ Tarea.init(
             defaultValue: 0
         }
     },
-    { sequelize, modelNAme: "tarea" }
+    { sequelize, modelName: "tarea" }
 );
 
 sequelize.sync();
