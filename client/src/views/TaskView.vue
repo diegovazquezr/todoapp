@@ -13,20 +13,36 @@ export default {
     components: { TaskList, TaskCreator},
     methods: {
         async fetchTareas() {
-            const tareas = await obtenerTareas();
-            this.tareas = tareas;
+            try {
+                const tareas = await obtenerTareas();
+                this.tareas = tareas;
+            } catch (error) {
+                this.tareas = [];
+            }
         },
         async manejadorCreacion(titulo) {
-            await crearTarea({ titulo: titulo });
-            this.fetchTareas();
+            try {
+                await crearTarea({ titulo: titulo });
+                this.fetchTareas();
+            } catch(error) {
+                console.log(error);
+            }
         },
         async manejadorEliminacion({ id }) {
-            await eliminarTarea(id);
-            this.fetchTareas();
+            try {
+                await eliminarTarea(id);
+                this.fetchTareas();
+            } catch(error) {
+                console.log(error);
+            }
         },
         async manejadorActualizacion({ id, titulo, completado }) {
-            await actualizarTarea(id, titulo, completado);
-            this.fetchTareas();
+            try {
+                await actualizarTarea(id, titulo, completado);
+                this.fetchTareas();
+            } catch (error) {
+                console.log(error);
+            }
         },
     },
     mounted() {

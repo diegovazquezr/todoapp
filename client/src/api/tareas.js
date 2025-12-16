@@ -11,34 +11,40 @@ export async function obtenerTareas() {
         const res = await api.get('/tareas');
         return res.data;
     } catch (error) {
-        console.log("Error recupérando las tareas");
-        return [];
+        console.error("Error recupérando las tareas");
+        throw error;
     }
 }
 
-export function crearTarea(tarea) {
+export async function crearTarea(tarea) {
     try {
-        const res = api.post('/tareas', tarea);
+        const res = await api.post('/tareas', tarea);
+        return res.data
     } catch (error) {
-        console.log("Error creando la tarea");
+        console.error("Error creando la tarea");
+        throw error;
     }
 }
 
-export function actualizarTarea(id, titulo, completado) {
+export async function actualizarTarea(id, titulo, completado) {
     try {
-        const res = api.put(`/tareas/${id}`, {
+        const res = await api.put(`/tareas/${id}`, {
             titulo: titulo,
             completado: completado
         });
+        return res.data
     } catch (error) {
-        console.log("Error actualizando la tarea");
+        console.error("Error actualizando la tarea");
+        throw error;
     }
 }
 
-export function eliminarTarea(id) {
+export async function eliminarTarea(id) {
     try {
-        const res = api.delete(`/tareas/${id}`);
+        const res = await api.delete(`/tareas/${id}`);
+        return res.data
     } catch (error) {
-        console.log("Error actualizando la tarea");
+        console.error("Error actualizando la tarea");
+        throw error;
     }
 }
